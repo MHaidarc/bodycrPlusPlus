@@ -94,6 +94,11 @@ while True:
 
         autopy.mouse.move(currentLocationX, currentLocationY)
 
+        closed = capture.leftHand.GetClosedFingers()
+
+        if closed[3] == True and closed[4] == True and closed[2] == False and closed[1] == False:
+            autopy.mouse.click(autopy.mouse.Button.LEFT)
+
     # fps.Update(img)d
 
     cv2.imshow("img", img)
