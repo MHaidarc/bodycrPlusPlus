@@ -2,11 +2,11 @@ import bodycr as cr
 from bodycr.source.Modules.Drawer import Color
 import cv2
 from pynput.keyboard import Key, Controller
-import pyautogui
+import mouse
 import numpy as np
 
 cap = cv2.VideoCapture(0)
-WIDTH_SCREEN, HEIGHT_SCREEN = pyautogui.size()
+WIDTH_SCREEN, HEIGHT_SCREEN = 1920, 1080
 
 capture = cr.Recognize(all=cr.Prefabs.ALL.lite.Mount())
 draw = cr.Drawer()
@@ -107,13 +107,12 @@ while True:
         armXinterp = np.interp(armX, (0, WIDTH), (0, WIDTH_SCREEN))
         armYinterp = np.interp(armY, (0, HEIGHT), (0, HEIGHT_SCREEN))
 
-        pyautogui.moveTo(armXinterp, armYinterp)
-        # print(pyautogui.position())
+        mouse.move(armYinterp, armYinterp)
 
         closed = capture.leftHand.GetClosedFingers()
 
         if closed[4] and closed[3] and not closed[2] and not closed[1]:
-            pyautogui.click()
+            mouse.click("left")
             draw.PutCircle(
                 cr.Mathb.TupToPoint((armX, armY)), 25, draw.FILL, Color.green
             )
