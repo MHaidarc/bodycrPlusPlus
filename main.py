@@ -16,7 +16,10 @@ keyboard = Controller()
 WIDTH, HEIGHT = cr.Resolutions.VGA
 LEFT_MARGIN = int(WIDTH / 2) - 100
 RIGHT_MARGIN = int(WIDTH / 2) + 100
-DOWN_MARGIN = HEIGHT - 100
+DOWN_MARGIN = HEIGHT - 1080
+
+left = []
+right = []
 
 smooth = 5
 
@@ -24,7 +27,6 @@ while True:
     succes, img = cap.read()
     img = cv2.resize(img, cr.Resolutions.VGA)
     img = cv2.flip(img, 1)
-    # img = cv2.resize(img, cr.Resolutions.VGA)
 
     capture.Read(img, cr.DETECT_ALL)
     draw.UpdateImage(img)
@@ -111,7 +113,7 @@ while True:
 
         closed = capture.leftHand.GetClosedFingers()
 
-        if closed[4] and closed[3] and not closed[2] and not closed[1]:
+        if closed[4] and closed[3] and closed[2] and not closed[1]:
             mouse.click("left")
             draw.PutCircle(
                 cr.Mathb.TupToPoint((armX, armY)), 25, draw.FILL, Color.green
