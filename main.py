@@ -54,7 +54,7 @@ while True:
         "JUMP", cr.Mathb.TupToPoint((int(WIDTH / 2) - 75, 430)), 2, Color.red, 2
     )
 
-    try:
+    if len(capture.pose) != 0:
         if capture.pose[31].y < DOWN_MARGIN and capture.pose[32].y < DOWN_MARGIN:
             draw.PutText(
                 "JUMP",
@@ -78,7 +78,7 @@ while True:
             keyboard.press("d")
         else:
             keyboard.release("d")
-    except:
+    else:
         pass
 
     if len(capture.leftHand.landmarks) != 0:
@@ -92,7 +92,7 @@ while True:
         draw.PutText(
             armAngle,
             cr.Mathb.TupToPoint((int(WIDTH / 2) - 75, 430)),
-            2.5,
+            3,
             Color.green,
             2,
         )
