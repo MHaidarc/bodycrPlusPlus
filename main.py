@@ -89,13 +89,6 @@ while True:
 
         if capture.leftHand.position.x < capture.pose[12].x:
             armAngle = 360 - armAngle
-        draw.PutText(
-            armAngle,
-            cr.Mathb.TupToPoint((int(WIDTH / 2) - 75, 430)),
-            3,
-            Color.green,
-            2,
-        )
 
         armAngle = np.radians(armAngle)
 
@@ -108,7 +101,7 @@ while True:
         armYinterp = np.interp(armY, (0, HEIGHT), (0, HEIGHT_SCREEN))
 
         # TODO: arrumar bugs mexendo o mouse
-        mouse.position = (int(armYinterp), int(armYinterp))
+        mouse.position = (int(armXinterp), int(armYinterp))
 
         closed = capture.leftHand.GetClosedFingers()
 
