@@ -1,8 +1,8 @@
 import bodycr as cr
 from bodycr.source.Modules.Drawer import Color
 import cv2
-from pynput.keyboard import Key, Controller
-import mouse
+import pynput.mouse as ms
+import pynput.keyboard as kbd
 import numpy as np
 
 cap = cv2.VideoCapture(0)
@@ -11,7 +11,8 @@ WIDTH_SCREEN, HEIGHT_SCREEN = 1920, 1080
 capture = cr.Recognize(all=cr.Prefabs.ALL.lite.Mount())
 draw = cr.Drawer()
 fps = cr.FPS()
-keyboard = Controller()
+keyboard = kbd.Controller()
+mouse = ms.Controller()
 
 WIDTH, HEIGHT = cr.Resolutions.VGA
 LEFT_MARGIN = int(WIDTH / 2) - 100
@@ -62,9 +63,9 @@ while True:
                 Color.green,
                 2,
             )
-            keyboard.press(Key.space)
+            keyboard.press(kbd.Key.space)
         else:
-            keyboard.release(Key.space)
+            keyboard.release(kbd.Key.space)
 
         if capture.pose[0].x < LEFT_MARGIN:
             draw.PutText("LEFT", cr.Mathb.TupToPoint((50, 70)), 2, Color.green, 2)
@@ -106,12 +107,12 @@ while True:
         armXinterp = np.interp(armX, (0, WIDTH), (0, WIDTH_SCREEN))
         armYinterp = np.interp(armY, (0, HEIGHT), (0, HEIGHT_SCREEN))
 
-        mouse.move(armYinterp, armYinterp)
+        mouse.position = (armYinterp, armYinterp)
 
         closed = capture.leftHand.GetClosedFingers()
 
         if closed[4] and closed[3] and closed[2] and not closed[1]:
-            mouse.click("left")
+            mouse.click(ms.Button.left)
             draw.PutCircle(
                 cr.Mathb.TupToPoint((armX, armY)), 25, draw.FILL, Color.green
             )
