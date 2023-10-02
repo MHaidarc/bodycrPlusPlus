@@ -18,9 +18,6 @@ LEFT_MARGIN = int(WIDTH / 2) - 100
 RIGHT_MARGIN = int(WIDTH / 2) + 100
 DOWN_MARGIN = HEIGHT - 1080
 
-left = []
-right = []
-
 smooth = 5
 
 while True:
