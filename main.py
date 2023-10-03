@@ -1,9 +1,10 @@
+import cv2
+import numpy as np
+import pynput.keyboard as kbd
+import pynput.mouse as ms
+
 import bodycr as cr
 from bodycr.source.Modules.Drawer import Color
-import cv2
-import pynput.mouse as ms
-import pynput.keyboard as kbd
-import numpy as np
 
 cap = cv2.VideoCapture(0)
 WIDTH_SCREEN, HEIGHT_SCREEN = 1920, 1080
