@@ -101,7 +101,6 @@ while True:
         armXinterp = np.interp(armX, (0, WIDTH), (0, WIDTH_SCREEN))
         armYinterp = np.interp(armY, (0, HEIGHT), (0, HEIGHT_SCREEN))
 
-        # TODO: arrumar bugs mexendo o mouse
         mouse.position = (int(armXinterp), int(armYinterp))
 
         closed = capture.leftHand.GetClosedFingers()
